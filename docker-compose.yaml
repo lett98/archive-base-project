@@ -1,0 +1,83 @@
+version: "3"
+services:
+  cm:
+    container_name: "cm"
+    environment:
+      HOT_SLAVE_URL: "jdbc:mysql://10.110.96.98:3306/ghtk"
+      HOT_SLAVE_USERNAME: "root"
+      HOT_SLAVE_PW: "root123"
+      TRACKING_URL: "jdbc:mysql://host.docker.internal:3306/tracking_db"
+      TRACKING_USERNAME: "root"
+      TRACKING_PW: "root123"
+      JOB_REPO_URL: "jdbc:mysql://host.docker.internal:3306/job_repository"
+      JOB_REPO_USERNAME: "root"
+      JOB_REPO_PW: "root123"
+      ENV_PROFILE: "production"
+      SENTRY_DSN: "https://2ac729a620b64a14b51445bd092b571d@o1294667.ingest.sentry.io/6758758"
+      CHECK_MARK_BATCHSIZE: "100"
+      CHECK_MARK_PARTITION_NUMBER: "4"
+      CHECK_MARK_INTERVAL: "4"
+      CHECK_MARK_TIMEWINDOW: "40"
+      HOT_SLAVE_PS: "3"
+      TRACKING_PS: "3"
+      JOB_REPO_PS: "3"
+    build:
+      context: .
+      dockerfile: Dockerfile-cm
+    image: cm:1.0.0
+
+  insertion:
+    container_name: "insertion"
+    environment:
+      HOT_SLAVE_URL: "jdbc:mysql://10.110.96.98:3306/ghtk"
+      HOT_SLAVE_USERNAME: "root"
+      HOT_SLAVE_PW: "root123"
+      TRACKING_URL: "jdbc:mysql://host.docker.internal:3306/tracking_db"
+      TRACKING_USERNAME: "root"
+      TRACKING_PW: "root123"
+      ARCHIVING_URL: "jdbc:mysql://host.docker.internal:3306/tracking_db"
+      ARCHIVING_USERNAME: "root"
+      ARCHIVING_PW: "root123"
+      JOB_REPO_URL: "jdbc:mysql://host.docker.internal:3306/job_repository"
+      JOB_REPO_USERNAME: "root"
+      JOB_REPO_PW: "root123"
+      ENV_PROFILE: "production"
+      SENTRY_DSN: "https://2ac729a620b64a14b51445bd092b571d@o1294667.ingest.sentry.io/6758758"
+      INSERT_BATCHSIZE: "100"
+      INSERT_PARTITION_NUMBER: "4"
+      INSERT_SECOND_INTERVAL: "5"
+      JOB_REPO_PS: "3"
+      TRACKING_PS: "3"
+      ARCHIVING_PS: "3"
+      HOT_SLAVE_PS: "3"
+    build:
+      context: .
+      dockerfile: Dockerfile-insertion
+    image: insertion:1.0.0
+
+  deletion:
+    container_name: "deletion"
+    environment:
+      HOT_MASTER_URL: "jdbc:mysql://10.110.96.98:3306/ghtk"
+      HOT_MASTER_USERNAME: "root"
+      HOT_MASTER_PW: "root123"
+      TRACKING_URL: "jdbc:mysql://host.docker.internal:3306/tracking_db"
+      TRACKING_USERNAME: "root"
+      TRACKING_PW: "root123"
+      JOB_REPO_URL: "jdbc:mysql://host.docker.internal:3306/job_repository"
+      JOB_REPO_USERNAME: "root"
+      JOB_REPO_PW: "root123"
+      ENV_PROFILE: "production"
+      SENTRY_DSN: "https://2ac729a620b64a14b51445bd092b571d@o1294667.ingest.sentry.io/6758758"
+      DELETE_PARTITION_NUMBER: "4"
+      DELETE_DAILY_BATCHSIZE: "30"
+      DELETE_NIGHTLY_BATCHSIZE: "100"
+      DELETE_DAILY_INTERVAL: "30"
+      DELETE_NIGHTLY_INTERVAL: "10"
+      JOB_REPO_PS: "6"
+      HOT_MASTER_PS: "6"
+      TRACKING_PS: "6"
+    build:
+      context: .
+      dockerfile: Dockerfile-deletion
+    image: deletion:1.0.0

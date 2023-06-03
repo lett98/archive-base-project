@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/archive-session-point-truck.iml" filepath="$PROJECT_DIR$/.idea/archive-session-point-truck.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cm/cm.iml" filepath="$PROJECT_DIR$/cm/cm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/deletion/deletion.iml" filepath="$PROJECT_DIR$/deletion/deletion.iml" />
+      <module fileurl="file://$PROJECT_DIR$/insertion/insertion.iml" filepath="$PROJECT_DIR$/insertion/insertion.iml" />
+    </modules>
+  </component>
+</project>
