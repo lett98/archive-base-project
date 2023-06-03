@@ -3,7 +3,7 @@ services:
   cm:
     container_name: "cm"
     environment:
-      HOT_SLAVE_URL: "jdbc:mysql://10.110.96.98:3306/ghtk"
+      HOT_SLAVE_URL: "jdbc:mysql://host.docker.internal:3306/slave_db"
       HOT_SLAVE_USERNAME: "root"
       HOT_SLAVE_PW: "root123"
       TRACKING_URL: "jdbc:mysql://host.docker.internal:3306/tracking_db"
@@ -29,7 +29,7 @@ services:
   insertion:
     container_name: "insertion"
     environment:
-      HOT_SLAVE_URL: "jdbc:mysql://10.110.96.98:3306/ghtk"
+      HOT_SLAVE_URL: "jdbc:mysql://host.docker.internal:3306/slave_db"
       HOT_SLAVE_USERNAME: "root"
       HOT_SLAVE_PW: "root123"
       TRACKING_URL: "jdbc:mysql://host.docker.internal:3306/tracking_db"
@@ -58,7 +58,7 @@ services:
   deletion:
     container_name: "deletion"
     environment:
-      HOT_MASTER_URL: "jdbc:mysql://10.110.96.98:3306/ghtk"
+      HOT_MASTER_URL: "jdbc:mysql://host.docker.internal:3306/master_db"
       HOT_MASTER_USERNAME: "root"
       HOT_MASTER_PW: "root123"
       TRACKING_URL: "jdbc:mysql://host.docker.internal:3306/tracking_db"
